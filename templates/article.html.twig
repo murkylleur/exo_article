@@ -1,0 +1,33 @@
+{# j'extend ma base Article afin d'appeler les éléments communs à tout le site #}
+{% extends 'baseArticles.html.twig' %}
+
+{% block title %}
+    Détail
+{% endblock title %}
+{% block css %}<link rel="stylesheet" href="{{ asset('asset/css/style2.css') }}">{% endblock %}
+
+{% block main %}
+
+        {# Mise en page particulière pour mon Titre Grâce à mon Css #}
+    <div class="title">
+        <div class="titlebarre"></div>
+        <div class="titlePage"><h1 >Détail de l'article</h1></div>
+        <div class="titlebarre"></div>
+    </div>
+
+    {# Création des balises articles pour mettre en forme la structure de mon article #}
+
+    <article class="article">
+
+        {# Je créé une div pour séparer le titre de mon contenu #}
+
+        <div class="articleContent">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+        </div>
+    </article>
+
+    {#  Bouton Pour retourner à la liste des articles grâce au Path #}
+
+    <div class="retour"><a href="{{ path('articles') }}">Retour aux articles</a></div>
+{% endblock main %}

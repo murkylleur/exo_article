@@ -1,0 +1,57 @@
+{# J'extend mon base.articles.html.twig afin de faire correspondre les contenus spéciaux de ma page  #}
+{% extends 'baseArticles.html.twig' %}
+
+{# je remplis le contenu du block title du baseArticles.html.twig par le contenu spécifique de ma page #}
+{% block title %}
+    Liste des Articles
+{% endblock title %}
+{% block css %} <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">{% endblock css %}
+
+
+{% block main %}
+
+    {# je remplis le contenu du block main du baseArticles.html.twig par le contenu spécifique de ma page #}
+    {# Mise en page particulière pour mon Titre Grâce à mon Css #}
+    <div class="title">
+        <div class="titlebarre"></div>
+        <div class="title-page"><h1 >Tous les articles</h1></div>
+        <div class="titlebarre"></div>
+    </div>
+
+    {# Création des balises articles pour mettre en forme la structure de mon article #}
+
+    <section class="articles-container">
+
+    {# Je fais une boucle foreach qui va afficher tous les elements que ma fonction me retourne sous forme de tableau #}
+
+        {% for articles in articles %}
+
+            <article class="article">
+                {# Titre de l'article #}
+                <h2>{{ articles.title }}</h2>
+
+                <div class="article-Content">
+
+                    {# resumé de l'article #}
+
+                    <p>{{ articles.resume }}</p>
+
+                    <div class="detail">
+
+                        {# lien vers le detail de l'article sélectionner #}
+                        <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
+
+                    </div>
+
+                </div>
+                {# Division vide pour juste du style avec le css #}
+                <div class="barre"></div>
+            </article>
+
+            {#  Je ferme ma boucle #}
+        {% endfor %}
+
+        {# J'ai fermé ma boucle avec endfor puis je ferme le contenu spécifique de mon main avec endblock #}
+    </section>
+
+{% endblock main %}

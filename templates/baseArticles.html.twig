@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {#Je créer un block de titre qui sera différent selon la page que j'appelerais #}
+    <title>{% block title %}{% endblock title%}</title>
+
+    {# Je link mon css des éléments communs #}
+
+    <link rel="stylesheet" href="{{ asset('asset/css/main.css') }}">
+
+    {% block css %}{% endblock %}
+    </head>
+    <body>
+        <header class="header">
+
+            {# Je met ma nav pour pouvoir accéder à mes focntionnalités rapidement #}
+            <nav class="menu-container">
+                <ul class="menu">
+
+                    {# Lien pour aller à la page home #}
+                    <li><a href="{{ path('home') }}" class="lien-menu">Acceuil</a></li>
+
+                    {# Lien pour aller à la listes des articles #}
+                    <li><a href="{{ path('articles') }}" class="lien-menu">Articles</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+
+            {# Mon main sera différent donc je met un trou  #}
+            {% block main%}{% endblock main%}
+        </main>
+        <footer class="footer">
+
+        </footer>
+    </body>
+    </html>
