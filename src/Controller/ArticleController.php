@@ -48,7 +48,8 @@ class ArticleController extends AbstractController
 
         // Je retourne le rendu à mon twig Articles qui est ma liste d'articles
         return $this->render('article.html.twig', [
-                'article'=>$article]);
+                'article'=>$article
+        ]);
     }
 
 
@@ -56,12 +57,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/home", name="home")
      */
-
+    //methode qui instencie ArticleRepository
+    //passer en paramètre permet de tout laisser à symfony (C'est de l'autowire)!!
     public function homePage(ArticleRepository $articleRepository){
 
         // Je fais une requete avant de selectionner les deux derniers articles sortis
         $article = $articleRepository->findBy(
-            ["published"=> '1'],['id'=>"DESC"],2
+            ["published"=> '1'],['date'=>"DESC"],2
         );
 
         //je retourne le résultat  a ma vue twig home

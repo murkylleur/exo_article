@@ -21,22 +21,22 @@
 
             {# Je fais une boucle foreach qui va afficher tous les elements que ma fonction me retourne sous forme de tableau #}
 
-            {% for articles in articles %}
+            {% for article in articles %}
 
                 <article class="article">
                     {# Titre de l'article #}
-                    <h2>{{ articles.title }}</h2>
+                    <h2>{{ article.title }}</h2>
 
                     <div class="article-Content">
 
                         {# resumé de l'article #}
 
-                        <p>{{ articles.resume }}</p>
+                        <p>{{ article.resume }}</p>
 
                         <div class="detail">
 
                             {# lien vers le detail de l'article sélectionner #}
-                            <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
+                            <a href="{{ path('show_article', {id :article.id}) }}">Détail de l'article</a>
 
                         </div>
 
