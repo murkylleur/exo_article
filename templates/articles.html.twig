@@ -24,33 +24,38 @@
 
     {# Je fais une boucle foreach qui va afficher tous les elements que ma fonction me retourne sous forme de tableau #}
 
-        {% for articles in articles %}
+        {% if articles |length > 0 %}
 
-            <article class="article">
-                {# Titre de l'article #}
-                <h2>{{ articles.title }}</h2>
+            {% for articles in articles %}
 
-                <div class="article-Content">
+                <article class="article">
+                    {# Titre de l'article #}
+                    <h2>{{ articles.title }}</h2>
 
-                    {# resumé de l'article #}
+                    <div class="article-Content">
 
-                    <p>{{ articles.resume }}</p>
+                        {# resumé de l'article #}
 
-                    <div class="detail">
+                        <p>{{ articles.resume }}</p>
 
-                        {# lien vers le detail de l'article sélectionner #}
-                        <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
+                        <div class="detail">
+
+                            {# lien vers le detail de l'article sélectionner #}
+                            <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
+
+                        </div>
 
                     </div>
+                    {# Division vide pour juste du style avec le css #}
+                    <div class="barre"></div>
+                </article>
 
-                </div>
-                {# Division vide pour juste du style avec le css #}
-                <div class="barre"></div>
-            </article>
+                {#  Je ferme ma boucle #}
+            {% endfor %}
 
-            {#  Je ferme ma boucle #}
-        {% endfor %}
-
+        {% else %}
+            <p>Il n'y a pas d'articles</p>
+        {% endif %}
         {# J'ai fermé ma boucle avec endfor puis je ferme le contenu spécifique de mon main avec endblock #}
     </section>
 

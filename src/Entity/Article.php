@@ -81,7 +81,7 @@ class Article
         return $this->resume;
     }
 
-    public function setResume(?string $content): self
+    public function setResume(?string $resume): self
     {
         $this->resume = $resume;
 
