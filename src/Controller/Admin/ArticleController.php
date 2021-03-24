@@ -4,14 +4,19 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+
+
+
 
     /**
      * @Route("/admin/articles", name="admin_list_articles")
@@ -33,25 +38,34 @@ class ArticleController extends AbstractController
     /**
      * @Route("/admin/articles/insert", name="admin_insert_article")
      */
-    public function insertArticle(EntityManagerInterface $entityManager)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-
-        // je créé une entité article avec les valeurs que je rentre moi-même
         $article = new Article();
-        $article->setTitle('Article inséré depuis le contrôleur');
-        $article->setContent('blab abla');
-        $article->setResume('resume de blabla');
-        $article->setDate(new \DateTime('NOW'));
-        $article->setPublished('1');
+
+        // je récupère le gabarit de formulaire d'Article et je le relie à mon nouvel article
+        $articleForm = $this->createForm(ArticleType::class, $article);
+
+        // je récupère les données de POST (donc envoyées par le formulaire) grâce
+        // à la classe Request, et je lie les données récupérées dans le formulaire
+        $articleForm->handleRequest($request);
+
+        // si mon formulaire a été envoyé et que les données de POST
+        // correspondent aux données attendues par l'entité Article
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+            // alors je récupère l'entité Article enrichie avec les données du formulaire
+            $article = $articleForm->getData();
+
+            // et j'enregistre l'article en bdd
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
 
 
-        // on utilise un outil pour indiquer à doctrine qu'on a créé des entités
-        // l'outil en question permet de gérer les entités
-        $entityManager->persist($article);
-        // puis on enregistre toutes les entités surveillées en base de données
-        $entityManager->flush();
-
-        return new Response('OK');
+        // je récupère (et compile) le fichier twig et je lui envoie le formulaire, transformé
+        // en vue (donc exploitable par twig)
+        return $this->render('admin/insert_article.html.twig', [
+            'articleFormView' => $articleForm->createView()
+        ]);
     }
 
     /**

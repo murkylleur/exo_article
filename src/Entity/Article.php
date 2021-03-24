@@ -52,11 +52,6 @@ class Article
      */
     private $category;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $category_id;
-
 
     /**
      * @return mixed
