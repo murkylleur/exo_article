@@ -48,7 +48,10 @@
 
                             {# lien vers le detail de l'article sélectionner #}
                             <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
-                            <a href="{{ path('article_delete', {id :articles.id}) }}"></a>
+                        </div>
+                        <div class="controll">
+                        <a href="{{ path('article_delete', {id :articles.id}) }}">Supprimer</a>
+                        <a href="{{ path('article_update', {id :articles.id}) }}">Update</a>
                         </div>
 
                     </div>
