@@ -22,21 +22,15 @@
 
     <section class="articles-container">
 
-    {# Je fais une boucle foreach qui va afficher tous les elements que ma fonction me retourne sous forme de tableau #}
+        {# Je fais une boucle foreach qui va afficher tous les elements que ma fonction me retourne sous forme de tableau #}
 
         {% if articles |length > 0 %}
 
             {% for articles in articles %}
 
                 <article class="article">
-
                     {# Titre de l'article #}
                     <h2>{{ articles.title }}</h2>
-                    {% if articles.category %}
-                        <h3>{{ articles.category.title }}</h3>
-                    {% else %}
-                        <h3>    </h3>
-                    {% endif %}
 
                     <div class="article-Content">
 
@@ -48,6 +42,7 @@
 
                             {# lien vers le detail de l'article sélectionner #}
                             <a href="{{ path('show_article', {id :articles.id}) }}">Détail de l'article</a>
+
                         </div>
 
                     </div>

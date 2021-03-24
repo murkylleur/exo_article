@@ -1,0 +1,9 @@
+{% extends "baseArticles.html.twig" %}
+
+{% block title %}{% endblock%}
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('asset/css/styleAdmin.css')}}">{% endblock %}
+
+{% block main %}
+    <h3>L'article :  {{ articles.title}} a été Supprimé</h3>
+{% endblock %}
